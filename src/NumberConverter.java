@@ -1,6 +1,5 @@
 public class NumberConverter {
-    int[] digits;
-    int base;
+    int digits[], base, number;
 
     public NumberConverter(int number, int base) {
         String numberAsString = Integer.toString(number);
@@ -11,6 +10,7 @@ public class NumberConverter {
             digits[i] = d;
         }
         this.base = base;
+        this.number = number;
     }
 
     public String displayOriginalNumber() {
@@ -27,11 +27,39 @@ public class NumberConverter {
     }
 
     public int[] convertToDecimal() {
+
         return null;
     }
 
     public int[] convertToBinary() {
-        return null;
+        int binaryArray[], number = this.number;
+        boolean converterRunning = true;
+        String binaryReturnString = "";
+
+        do {
+           int oldNumber = number;
+           number = number / 2;
+
+           if (number * 2 + 1 == oldNumber) binaryReturnString += 1;
+           else binaryReturnString += 0;
+
+           if (number == 0) converterRunning = false;
+        } while (converterRunning);
+
+        String tempString = "";
+        for (int i = binaryReturnString.length() - 1; i > -1; i--) {
+            tempString += binaryReturnString.charAt(i)+"";
+        }
+
+        binaryReturnString = tempString;
+
+        binaryArray = new int[binaryReturnString.length()];
+
+        for (int i = binaryReturnString.length() - 1; i > -1; i--) {
+            binaryArray[i] = Integer.parseInt(binaryReturnString.charAt(i)+"");
+        }
+
+        return binaryArray;
     }
 
     public int[] convertToOctal() {
