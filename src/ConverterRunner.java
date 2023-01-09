@@ -22,5 +22,34 @@ class ConverterRunner {
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayOriginalNumber());
         System.out.println(Arrays.toString(nc.convertToBinary()));
+
+        nc.convertToOctal();
+    }
+
+    public static boolean isInputValid(String number, int base) {
+        boolean validInput = true;
+
+        switch (base) {
+            case 2:
+                String invalidCharacters[] = {"2", "3", "4", "5", "6", "7", "8", "9"};
+
+                for (int i = 0; i < number.length(); i++) {
+                    String c = number.charAt(i)+"";
+
+                    for (String toCompare : invalidCharacters) {
+                        if (c.equals(toCompare)) validInput = false;
+                    }
+                }
+
+                if (validInput && number.length() == 8) validInput = true;
+                break;
+
+            case 8:
+                break;
+            case 10:
+                break;
+        }
+
+        return validInput;
     }
 }

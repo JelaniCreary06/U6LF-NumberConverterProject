@@ -38,7 +38,7 @@ public class NumberConverter {
 
         do {
            int oldNumber = number;
-           number = number / 2;
+           number /= 2;
 
            if (number * 2 + 1 == oldNumber) binaryReturnString += 1;
            else binaryReturnString += 0;
@@ -63,6 +63,31 @@ public class NumberConverter {
     }
 
     public int[] convertToOctal() {
-        return null;
+        int octalArray[], number = this.number;
+        boolean converterRunning = true;
+        String octalReturnString = "";
+
+        do {
+            octalReturnString += (number % 8);
+            number /= 8;
+
+            if (number == 0) converterRunning = false;
+        } while (converterRunning);
+
+        String tempString = "";
+
+        for (int i = octalReturnString.length() - 1; i > -1; i--) {
+            tempString += octalReturnString.charAt(i)+"";
+        }
+
+        octalReturnString = tempString;
+
+        octalArray = new int[octalReturnString.length()];
+
+        for (int i = 0; i < octalReturnString.length(); i++) {
+            octalArray[i] = octalReturnString.charAt(i);
+        }
+
+        return octalArray;
     }
 }
