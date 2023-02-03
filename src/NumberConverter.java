@@ -13,6 +13,24 @@ public class NumberConverter {
         this.number = number;
     }
 
+    public String displayAsNumber(int[] newDigits) {
+        String o = "";
+        for (int i = 0; i < newDigits.length; i++) {
+            o = o + newDigits[i];
+        }
+        o = o;
+        return o;
+    }
+
+    public String displayAsNumber(String[] newDigits) {
+        String o = "";
+        for (int i = 0; i < newDigits.length; i++) {
+            o = o + newDigits[i];
+        }
+        o = o;
+        return o;
+    }
+
     public String displayOriginalNumber() {
         String o = "";
         for (int i = 0; i < digits.length; i++) {
@@ -27,67 +45,62 @@ public class NumberConverter {
     }
 
     public int[] convertToDecimal() {
+        int dec = 0;
+        for (int i = 0; i < digits.length; i++)
+        {
+            dec += ((digits[digits.length - 1 - i]) * (int)Math.pow(base, i));
+        }
 
-        return null;
+        String numberAsString = Integer.toString(dec);
+        int[] toDec = new int[numberAsString.length()];
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String single = numberAsString.substring(i,i+1);
+            int d = Integer.parseInt(single);
+            toDec[i] = d;
+        }
+        return toDec;
+
     }
 
     public int[] convertToBinary() {
-        int binaryArray[], number = this.number;
-        boolean converterRunning = true;
-        String binaryReturnString = "";
-
-        do {
-           int oldNumber = number;
-           number /= 2;
-
-           if (number * 2 + 1 == oldNumber) binaryReturnString += 1;
-           else binaryReturnString += 0;
-
-           if (number == 0) converterRunning = false;
-        } while (converterRunning);
-
-        String tempString = "";
-        for (int i = binaryReturnString.length() - 1; i > -1; i--) {
-            tempString += binaryReturnString.charAt(i)+"";
+        String binary = "";
+        String display = displayAsNumber(convertToDecimal());
+        int num = Integer.parseInt(display);
+        while ((num / 2) != 0)
+        {
+            binary = num % 2 + binary;
+            num = num/2;
         }
+        binary = num%2 + binary;
 
-        binaryReturnString = tempString;
-
-        binaryArray = new int[binaryReturnString.length()];
-
-        for (int i = binaryReturnString.length() - 1; i > -1; i--) {
-            binaryArray[i] = Integer.parseInt(binaryReturnString.charAt(i)+"");
+        String numberAsString = binary;
+        int[] toBin = new int[numberAsString.length()];
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String single = numberAsString.substring(i,i+1);
+            int d = Integer.parseInt(single);
+            toBin[i] = d;
         }
-
-        return binaryArray;
+        return toBin;
     }
 
     public int[] convertToOctal() {
-        int octalArray[], number = this.number;
-        boolean converterRunning = true;
-        String octalReturnString = "";
-
-        do {
-            octalReturnString += (number % 8);
-            number /= 8;
-
-            if (number == 0) converterRunning = false;
-        } while (converterRunning);
-
-        String tempString = "";
-
-        for (int i = octalReturnString.length() - 1; i > -1; i--) {
-            tempString += octalReturnString.charAt(i)+"";
+        String octal = "";
+        String display = displayAsNumber(convertToDecimal());
+        int num = Integer.parseInt(display);
+        while ((num / 8) != 0)
+        {
+            octal = num % 8 + octal;
+            num = num/8;
         }
+        octal = num%8 + octal;
 
-        octalReturnString = tempString;
-
-        octalArray = new int[octalReturnString.length()];
-
-        for (int i = 0; i < octalReturnString.length(); i++) {
-            octalArray[i] = octalReturnString.charAt(i);
+        String numberAsString = octal;
+        int[] toOct = new int[numberAsString.length()];
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String single = numberAsString.substring(i,i+1);
+            int d = Integer.parseInt(single);
+            toOct[i] = d;
         }
-
-        return octalArray;
+        return toOct;
     }
 }

@@ -21,9 +21,24 @@ class ConverterRunner {
         int[] digits = nc.getDigits();
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayOriginalNumber());
-        System.out.println(Arrays.toString(nc.convertToBinary()));
 
-        nc.convertToOctal();
+
+        switch (base) {
+            case 2:
+                System.out.println("Octal Number: " + nc.displayAsNumber(nc.convertToOctal()));
+                System.out.println("Decimal Number: " + nc.displayAsNumber(nc.convertToDecimal()));
+                break;
+            case 8:
+                System.out.println("Binary Number: " + nc.displayAsNumber(nc.convertToBinary()));
+                System.out.println("Decimal Number: " + nc.displayAsNumber(nc.convertToDecimal()));
+                break;
+            case 10:
+                System.out.println("Binary Number: " + nc.displayAsNumber(nc.convertToBinary()));
+                System.out.println("Octal Number: " + nc.displayAsNumber(nc.convertToOctal()));
+                break;
+
+        }
+
     }
 
     public static boolean isInputValid(String number, int base) {
